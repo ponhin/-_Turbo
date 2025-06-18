@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алёнка_Turbo - Умный поиск</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="home-page" class="container">
+            <div class="header">
+                <a href="about.html" class="logo">
+                    <div class="logo-icon animate-bounce">М</div>
+                    <span>Алёнка_Turbo</span>
+                </a>
+                <div class="theme-switcher">
+                    <button class="theme-btn active" data-theme="light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                        </svg>
+                        Светлая
+                    </button>
+                    <button class="theme-btn" data-theme="dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                        </svg>
+                        Тёмная
+                    </button>
+                    
+
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-form">
+                    <input type="text" id="search-input" placeholder="Введите поисковый запрос..." autofocus>
+                    <button id="search-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                        Найти
+                    </button>
+                    <div class="suggestions" id="suggestions"></div>
+                    <button id="voice-button" title="Голосовой ввод">🎤</button>
+
+
+                </div>
+            </div>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <div>Идет поиск...</div>
+            </div>
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-results" class="search-results"></div>
+            
+            <div class="footer">
+                <p>Алёнка_Turbo © 2025 - Умная поисковая система с помощником Алёнушкой</p>
+            </div>
+        </div>
+    </div>
+    <div id="chatbot-container" class="chatbot-container">
+        <div id="chatbot-header" class="chatbot-header">
+            <span>Алёнушка - ваш помощник</span>
+            <button id="chatbot-close">×</button>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-user-input" placeholder="Задайте ваш вопрос...">
+            <button id="chatbot-send">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div id="chatbot-toggle" class="chatbot-toggle">
+        <img src="Лого.png" alt="Алёнушка" width="40">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
